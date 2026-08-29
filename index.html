@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shout a Drink — Sausage Therapy</title>
+  <meta name="description" content="Shout Emily a drink and keep Sausage Therapy moving. Instant PayID." />
+  <meta name="theme-color" content="#1a120c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140e0a;
+      --card: #221710;
+      --ink: #f6ead7;
+      --muted: #c9b39a;
+      --gold: #e8b86d;
+      --gold-2: #f3d5a0;
+      --line: rgba(232,184,109,.22);
+      --ok: #9ad0a0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: "Source Sans 3", system-ui, sans-serif; }
+    body {
+      min-height: 100vh;
+      background-image:
+        radial-gradient(1200px 500px at 50% -10%, rgba(232,184,109,.16), transparent 60%),
+        radial-gradient(600px 400px at 100% 100%, rgba(120,60,20,.25), transparent 50%);
+    }
+    .wrap { max-width: 440px; margin: 0 auto; padding: 28px 20px 64px; }
+    .eyebrow { letter-spacing: .18em; text-transform: uppercase; font-size: 11px; color: var(--gold); font-weight: 700; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: 2.05rem; line-height: 1.15; margin: 10px 0 8px; }
+    .lede { color: var(--muted); font-size: 1.05rem; line-height: 1.5; margin: 0 0 22px; }
+    .card {
+      background: linear-gradient(180deg, #2a1c13, #1c130e);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .amounts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    button.amt, a.amt {
+      display: block; width: 100%; text-align: left; text-decoration: none;
+      background: #2f2016; color: var(--ink); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px 14px 12px; cursor: pointer; font: inherit;
+    }
+    button.amt:active, a.amt:active { transform: scale(.98); }
+    button.amt strong, a.amt strong { display: block; font-size: 1.25rem; color: var(--gold-2); }
+    button.amt span, a.amt span { display: block; color: var(--muted); font-size: .85rem; margin-top: 2px; }
+    .payid {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 1.02rem; word-break: break-all; color: var(--gold-2);
+      background: #120c08; border-radius: 10px; padding: 12px 12px; margin: 10px 0 12px;
+      border: 1px dashed var(--line);
+    }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      flex: 1; min-width: 120px; text-align: center; text-decoration: none;
+      background: var(--gold); color: #1a120c; font-weight: 700;
+      border: 0; border-radius: 999px; padding: 12px 14px; cursor: pointer; font-size: .95rem;
+    }
+    .btn.ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+    .note { font-size: .88rem; color: var(--muted); margin: 8px 0 0; line-height: 1.45; }
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      background: #16351c; color: var(--ok); border: 1px solid #2e6b3a;
+      padding: 10px 16px; border-radius: 999px; font-weight: 600; display: none; z-index: 9;
+    }
+    footer { margin-top: 28px; color: var(--muted); font-size: .82rem; text-align: center; }
+    footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="eyebrow">Sausage Therapy</div>
+    <h1>Shout a drink. Keep the work moving.</h1>
+    <p class="lede">Direct support — not a platform cut. Use PayID and it lands instantly in Australia.</p>
+
+    <section class="card">
+      <div class="eyebrow">Suggested shouts</div>
+      <div class="amounts" style="margin-top:12px">
+        <button class="amt" data-amt="8" type="button"><strong>$8</strong><span>Schooner</span></button>
+        <button class="amt" data-amt="15" type="button"><strong>$15</strong><span>Pint + chips</span></button>
+        <button class="amt" data-amt="25" type="button"><strong>$25</strong><span>Proper shout</span></button>
+        <button class="amt" data-amt="50" type="button"><strong>$50</strong><span>Keep the flame on</span></button>
+      </div>
+      <p class="note">Tap an amount to copy the PayID plus the reference. Any amount works.</p>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">PayID</div>
+      <div class="payid" id="payid">emilybluerichards@gmail.com</div>
+      <div class="row">
+        <button class="btn" id="copy" type="button">Copy PayID</button>
+        <a class="btn ghost" href="sms:0447034232?body=PayID%20shout%20for%20Sausage%20Therapy">Text instead</a>
+      </div>
+      <p class="note">PayID / email: emilybluerichards@gmail.com<br/>Mobile: 0447 034 232<br/>Reference: SAUSAGE or DRINKS</p>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">What this funds</div>
+      <p class="note" style="margin-top:10px">Tonight’s drinks, fuel, and the next Sausage Therapy move. No middleman. If you already support the dogs and the work, this is the shortest path.</p>
+    </section>
+
+    <footer>
+      Sausage Therapy · Noosa Dachshunds · Forevermore<br/>
+      <a href="https://x.com/TherapySausages">@TherapySausages</a>
+    </footer>
+  </main>
+  <div class="toast" id="toast">Copied</div>
+  <script>
+    const payid = "emilybluerichards@gmail.com";
+    const toast = document.getElementById("toast");
+    function flash(msg) {
+      toast.textContent = msg;
+      toast.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(() => toast.style.display = "none", 1800);
+    }
+    async function copy(text, msg) {
+      try { await navigator.clipboard.writeText(text); flash(msg); }
+      catch (e) { flash("Copy failed — PayID is on screen"); }
+    }
+    document.getElementById("copy").addEventListener("click", () => copy(payid, "PayID copied"));
+    document.querySelectorAll("button.amt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const amt = btn.dataset.amt;
+        copy(payid + "  $" + amt + "  ref SAUSAGE", "$" + amt + " + PayID copied");
+      });
+    });
+  </script>
+</body>
+</html>
